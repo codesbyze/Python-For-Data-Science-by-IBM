@@ -1,0 +1,518 @@
+#STRING OPS
+
+name = "José Paulo"
+newName = name.upper()
+update2_name = newName.lower()
+update3_name = update2_name.replace("José", "Zé")
+print(update3_name)
+print(update3_name.find("on"))
+splitName = update3_name.split()
+print(splitName)
+
+#REGULAR (RegEx) AND SPECIAL EXPRESSIONS
+
+import re
+s1 = "Zé Paulo"
+pattern = "oo"
+result = re.search(pattern, s1)
+if result:
+    print("match found!")
+else:
+    print("match not found :(")
+
+pattern = r"\d"
+s2 = "I was born on January 03rd, two thousand."
+match = re.search(pattern, s2)
+
+if match:
+    print("match successful")
+else:
+    print("match not successful")
+
+s3 = "Zé is into longevity"
+result = re.findall("t", s3)
+print(result)
+
+split_array = re.split("\s", s3)
+print(split_array)
+
+pattern = r"into longevity"
+replacement = "wants to defeat aging"
+s4 = re.sub(pattern, replacement, s3, flags=re.IGNORECASE)
+print(s4)
+
+#TUPLES (unmutable) AND LISTS (mutable)
+
+ratings = (10,8,9,4,5,3,2,5,5,5,10) #this is a tuple
+ratings_sorted = sorted(ratings)
+print(ratings_sorted)
+
+ratings2 = [10, 8, 9, 4, 5, 3, 2, 5, 5, 5, 10]
+ratings2.sort() #only works for lists, not tuples; this is not a built-in function, it's a method. We use it so we do not need to create a new variable.
+print(ratings2)
+
+#Nesting
+TP = (1,2,("snoop double G dogg", "Dr.Dre"), 3.5, (5,6), ("Marshall"))
+print(TP[2]) #this equals Snoop and Dr. Dre
+print(TP[2][1]) #this is equal just to Dr. Dre, a tuple inside of a tuple
+#If we wanted we could go deeper and access the individual characters as well
+
+list = ["reggie", "jay-z", "tupac", "biggie"]
+list2 = list + ["Nas", "Eminem", (5, 10)] #concatanation of lists. Plus, I added a tuple inside of the list.
+print(list2)
+
+#Functions of lists include: Append (add entire new list as 1 item), Extend (add item per item)
+list2.extend([2, 3, 4])
+print(list2)
+del(list2[7:10])
+
+#Changing lists more directly
+list2[2] = "2pac"
+print(list2)
+
+#Convert strings to list
+str2list = "michael jordan".split()
+print(str2list)
+
+#Use a delimeter. Gonna use a comma!
+footballBest = "Pele, Messi, Ronaldo Fenomeno, Cruyff, Beckenbauer, Di Stefano, Maradona, Cristiano Ronaldo, Ronaldinho, Zidane".split(",")
+print(footballBest)
+
+#Clone a list
+footballBest_clone = footballBest[:]
+print(footballBest_clone)
+
+#SETS (unordered, do not accept duplicates)
+
+myCell_set = {"DNA", "RNA", "Ribosome", "Mitochondria", "Golgi complex", "DNA"}
+print(myCell_set) #only 1 "DNA" is printed
+
+#Convert Lists to Sets to eliminate duplicates
+myCell_list = ["DNA", "RNA", "Ribosome", "Mitochondria", "Golgi complex", "DNA"]
+print(myCell_list)
+convertedCell_set = set(myCell_list)
+print(convertedCell_set)
+
+#Set Ops
+convertedCell_set.add ("Lysosome")
+convertedCell_set.remove ("DNA")
+print(convertedCell_set)
+
+#Checking if something is in a given set
+print("RNA" in convertedCell_set) #True
+print("DNA" in convertedCell_set) #False
+
+#Working with 2 sets
+newCell_set = {"Ribosome", "Mitochondria", "Lysosome", "Endoplasmic Reticulum", "Cytoplasm"}
+junctionCell_set = convertedCell_set & newCell_set
+print(junctionCell_set) #Ribosome, Mitochondira and Lysosome
+
+print(newCell_set.intersection(convertedCell_set)) #same of the above
+
+print(newCell_set.issubset(convertedCell_set)) #False because some elements are only in the newCell_set
+
+print(newCell_set.difference(convertedCell_set)) #ER and Cytoplasm
+
+myFinalCell_set = convertedCell_set.union(newCell_set)
+print(myFinalCell_set)
+
+Numbers1 = {5, 15, 15, 5}
+Numbers2 = {5, 5, 15, 15}
+print("the sum of Numbers1 is", sum(Numbers1))
+print("the sum of Numbers2 is", sum(Numbers2))
+#as this is a SET each number is only counted once
+
+#DICTIONARIES
+
+myDictionary = {"DNA": 1869, "mRNA": 1933, "Mitochondria": 1857}
+#before colon is called: "key", after colon is called: "value"
+print(myDictionary["DNA"])
+
+myDictionary["Cell"]="1665" #adding a new key & value
+del(myDictionary["mRNA"]) #deleting an old key & value
+print(myDictionary)
+
+print("Ribosome" in myDictionary) #False
+
+print(myDictionary.keys()) #to print all my keys
+print(myDictionary.values()) #to print all my values
+
+#keys are companies, values are their annual net income in 2023 (in billions of USD)
+companies_netIncome = {"Apple": 97, "Alphabet": 73.8, "Meta": 39, "Tesla": 15}
+totalNet_income = companies_netIncome.values()
+print(sum(totalNet_income))
+
+#BRANCHING
+
+#BMI calculator
+weight = float(input("what's your weight in kg? "))
+height = float(input("what's your height in meters? Please use a dot. "))
+BMI = weight/(height**2)
+
+if BMI >= 18.5 and BMI <=24.9:
+    print("your BMI is within the normal range")
+elif BMI < 18.5:
+    print("your BMI is within the underweight range")
+elif BMI > 24.9:
+    print("your BMI is within the pre-obese/obese ranges")
+else:
+    print("your BMI was not properly calculated")
+
+#LOOPS (FOR & WHILE)
+
+print(range(3)) #outputs 0, 1 and 2
+print(range(10,15)) #outputs 10, 11, 12, 13 and 14
+
+#For Loops (it runs as many times as we program it, based on the number of elements in our list). Here I'm replacing all book cover colors by white
+book_covers = ["red", "yellow", "green", "blue", "purple"]
+for i in range (0,5):
+    book_covers[i]="white"
+print(book_covers)
+books2 = ["red", "yellow", "green"]
+for i in books2:
+    i
+print(i) #only green is outputed as the last iteration override previous ones
+
+for i,ii in enumerate(books2):
+    ii
+    i
+print(ii, i) #here it outputs the last value of the list plus its index
+
+print("Multiplication table of 6: ")
+for i in range(0,10):
+    print("6 *", i, "=", i*6)
+
+#While loops (only runs when a given condition is True and it's often used when we do not know how many iterations will be needed)
+books3 = ["white", "white", "white", "orange", "white"]
+newBooks = []
+i=0
+while (books3[i]=="white"):
+    newBooks.append(books3[i])
+    i=i+1
+print(newBooks)
+
+#CUSTOM FUNCTIONS
+
+def add1(a):
+    """
+    adding 1
+    """
+    b=a+1
+    print(b)
+    return b
+add1(5)
+
+def divider(x, y):
+    z = x/y
+    print(z)
+    return (x, y)
+divider(4, 2)
+
+def mult(a,b):
+    c = a*b
+    print(c)
+    return c
+mult(2,3) #we can also multiply str and int: Zé * 2 = Zé Zé.
+    
+
+def multiplyPi():
+    """"
+    multiplying by Pi
+    """
+    userInput = float(input("enter any number you wanna multiply by Pi, to 39 decimal places : "))
+    addedValue = userInput * 3.141592653589793238462643383279502884197
+    print(userInput, "times Pi equals", addedValue)
+    return addedValue
+multiplyPi()
+
+#using a For Loop + Def function
+#i is for the index of the list (0,1,2...) and v for value (the rating)
+def printStuff(Stuff):
+    for i,v in enumerate(Stuff):
+        print("Album ",i, "Rating is ", v)
+algum_ratings = [10, 8.5, 9.5]
+printStuff(algum_ratings)
+
+def AddZ(x):
+    x=x+"-Z"
+    print(x)
+    return x
+x="Jay"
+z=AddZ(x)
+#PS, not related to the code above: variables defined within the local scope (under the indentation of Def), by standard are not valid wihtin the global scope (outside Def's indentation).
+
+#Finding how many times the word "aging" shows up
+def freq(text, key): #"text" is the full text, "key" is the word I wanna count
+    words = text.split() #creating a var called "words" to split the text in individual words (strings)
+    count = words.count(key) #couting from the individual strings above
+    print("total count: ", count)
+freq("Senescence, or biological aging, refers to the gradual decline in functional abilities in organisms, affecting either individual cells or the entire organism. It is characterized by increased mortality and/or reduced fertility in the latter stages of life. Despite this natural process, certain interventions, such as calorie restriction demonstrated in rats in 1934, have shown potential to delay aging, and research is also inspired by organisms that exhibit little to no aging, like some species and potentially immortal beings like Hydra, as well as by rare human mutations that lead to rapid aging, aiming to understand and possibly slow down age-related deterioration.", "aging,")
+
+#CLASS
+
+class PokemonGen1():
+
+    trainer = "Zé Paulo" #adding as an attribute to all pokemons, different of the attributes in the fucntion defined below that are individual for each.
+
+    def __init__(self, power, friendliness, type, dopeness):
+        self.power = power;
+        self.friendliness = friendliness;
+        self.type = type;
+        self.dopeness = dopeness;
+
+Pikachu = PokemonGen1(6, 10, "electric", 5) #this is an Object of the Class "PokemonGen1"
+Charizard = PokemonGen1 (7.5, 6.5, "fire", 10)
+Dragonite = PokemonGen1(7, 8, "dragon",7.5)
+Hitmonchan = PokemonGen1 (5, 7, "fight", 7.5)
+Ho_Oh = PokemonGen1(10, 5.5, "fire", 10)
+
+print("Charizard dopeness:", Charizard.dopeness)
+print("Hitmonchan trainer is", Hitmonchan.trainer)
+
+#MANIPULATING A TXT FILE
+
+#Reading my file
+Theories_Of_Aging = "/Users/zepaulo/Downloads/TextEdit/TheoriesOfAging_Python.txt"
+agingTheories = open(Theories_Of_Aging, "r")
+print(agingTheories.mode) #using methods ("mode", "name" and "close") on files
+print(agingTheories.name)
+print(agingTheories.close())
+
+with open(Theories_Of_Aging, "r") as agingTheories2:
+    aging_read = agingTheories2.read()
+    print(aging_read) #reading the entire file
+
+    print("###separate lines###")
+
+    agingTheories2.seek(0)
+    aging_limited_read = agingTheories2.read(10) #reading character by character
+    print(aging_limited_read)
+
+    print("###separate lines###")
+
+    agingTheories2.seek(0) #moving the cursor back again to the beginning of the file, so the Foor Loop has something to iterate over. Always necessary after a reading operation whenever we want to read a given file again.
+    for line in agingTheories2: #iterating line by line
+        print(line)
+
+    print("###separate lines###")
+
+    agingTheories2.seek(0)
+    aging_readlines = agingTheories2.readlines(4) #print the 4 first words of my file
+    print(aging_readlines)
+
+#Writing in my file
+with open(Theories_Of_Aging, "w") as agingTheories3:
+    agingTheories3.write("This line is coming from Visual Studio")
+
+#Writing multiple lines with a For Loop file
+newLines = ["This is a new line A\n", "This is a new line B\n", "This is a new line C"]
+with open(Theories_Of_Aging, "w") as agingTheories4:
+    for line in newLines:
+        agingTheories4.write(line)
+
+#Writing an appendix to my file
+with open(Theories_Of_Aging, "a") as agingTheories5:
+    agingTheories5.write("This is an appendix added from Visual Studio.")
+
+#Copying one file text to another
+    with open(Theories_Of_Aging, "r") as olderFile:
+        with open(Theories_Of_Aging, "w") as newerFile: #should use another file here to receive the copy but I just prefer inputing energy in writing this comment than creating a new TXT file on my Mac lol
+            for line in olderFile:
+                newerFile.write(line)
+
+#PANDAS
+
+import pandas as pd
+agingTable = "/Users/zepaulo/Downloads/20th Century Major Theories of Aging.xlsx"
+df = pd.read_excel(agingTable) #df = dataframe
+print(df.head()) #used to examine the first 5 rows of a df
+
+#Creating df out of a dictionary
+research = {"Theory": ["Wear and Tear", "Neuroendocrine", "Free Radical", "Cellular Senescence", "Immunological", "Telomere"], "Author": ["August Weismann", "Vladimir Dilman", "Denham Harman", "Leonard Hayflick", "Roy Walford", "Alexey Olovnikov"]}
+research_frame = pd.DataFrame(research)
+print(research_frame)
+
+#Slicing 1 column from our df above
+newDF = df[["Author"]] #you can also perform this for multiple columns
+print(newDF)
+
+#Accessing specific elements
+print(df.columns) #printing the columns
+print(df.loc[0, "Theory"]) #data extracted from 1st row and 1st column
+
+copiedDF = df.iloc[0:5, 0:1] #copying data to a new df; first digits are how many rows we want (from 0 to 5 index), 2nd digits are how many columns we want (in this case only 1, from 0 to 1)
+print(copiedDF) #must use "iloc" instead of "loc" when localizing integers
+
+copiedLabels = df.loc[0:2, "Theory":"Author"] #assigns the first 3 rows (inlcuding index 2) to all columns in the between Thoery and Author, including themselves as well.
+print(copiedLabels)
+
+print(df["Theory"].unique()) #printing as a list all unique values from a given column (if a value appears once, twice or 10x, it's regardless gonna be printed only 1 time).
+
+#Filtering out a date or numerical value
+companiesFoundation = "/Users/zepaulo/Downloads/Python Example - Companies Foundation.xlsx"
+df = pd.read_excel(companiesFoundation)
+print(df)
+
+DF_update = df[df["year founded"]>=2015] #This would filter out all companies founded in or after 1985 and other info from them in their row, for example. "year founded" would be a column.
+DF_update.to_excel("year of foundation.xlsx", index=False) #saving the updated dataframe to my internal storage in the Mac; btw, I just wrote a shorter pathway to get it saved, but I could have written all the "/users/zepaulo..." thing. If you do not use "index=False" it does not save the table with the actual values, it saves Booleans with 0s and 1s in case a company met the criteria of being foundaded in or after 2015 or not.
+yearOfFoundation = "/Users/zepaulo/Downloads/year of foundation.xlsx"
+df2 = pd.read_excel(yearOfFoundation)
+print(df2)
+
+#NUMPY
+
+import numpy as np
+var = np.array([1,2,3,4,5]) #an array is composed of only 1 data type.
+print(type(var)) #it let us know we're dealing with a numpy data type.
+print(var.dtype) #it let us know the data type contained within our list is integers.
+print(var.size) #it prints how many elements are within the array
+print(var.ndim) #it prints how many dimensions our array has, in this case it's 1D
+print(var.shape) #this indicates the size (5) of the array in each dimension (only 5 here).
+
+#indexing and slicing
+var[0] = 0 #changing the 1st element of the array
+print(var)
+var[3:5] = 6, 7 #changing multiple elements of the array at the same time
+print(var)
+
+selectedVar = var[1:4] #cutting my array from the 2nd to the 4th elements
+print(selectedVar)
+
+#dealing with vectors (as a list); summing up example
+u = [1, 0] #1 unit in horizontal in a Cartesian plane
+v = [0, 1] #1 unit in vertical in a Cartesian plane
+z = [] #this is gonna be the sum of the above
+
+for n,m in zip(u,v): #"n" represents "u" & "m" represents "v"
+    z.append(n+m)
+print(z) #the output contains a comma as the output is a list
+
+#dealing with vectors in Numpy; summing up example
+a = np.array([1,0])
+b = np.array([0,1])
+c = a+b
+print(c) #no commas in the output as it is most often in math
+
+#vector multiplication with a scalar value ("2")
+y = np.array([1, 2])
+z = 2*y
+print(z)
+
+#product of 2 arrays
+j = np.array([1, 2])
+p = np.array([3, 2])
+jp = j*p
+print(jp) #output is [3 4]
+
+#dot product of 2 arrays
+jp = j @ p
+print(jp) #the same multiplication from above is executed, then we add all results (in this case its 3+4). This is meant to see how similar the arrays are between themselves.
+
+#adding a constant to an array
+newArray = np.array([1,2,3,4,5,6,7,8,9])
+plusOne_array = newArray+1 #all values + 1, so our array now goers from 2 to 10
+print(plusOne_array)
+
+#universal functions (applies to ndarrays, meaning, arrays of all dimensions)
+mean_newArray = newArray.mean()
+print(mean_newArray)
+
+max_newArray = newArray.max()
+print(max_newArray)
+
+#map one array to another
+np.pi #access the value of Pi
+x = np.array([0, np.pi/2, np.pi]) #values of the vector are: 0, Pi/2, Pi, they're representing a radian
+y = np.sin(x) #as we are dealing with angles, here I'm taking the sin of the radian described above
+print(y) #the result is a new array, where each value corresponds to a sine function being applied to each element in the array x
+
+#function for plotting mathematical functions
+intervals = np.linspace(-2,2,num=5) #it prints all 5 evenly spaced values between -2 and 2. If we increase the "num" of intervals, floats may be printed (see below)
+intervals2 = np.linspace(-2,2,num=9)
+print(intervals)
+print(intervals2)
+
+#generate 100 evenly spaced values between 0 and 2Pi
+pi100 = np.linspace(0,2*np.pi,num=100)
+print(pi100)
+print("separating a line here")
+sinValue = np.sin(pi100)
+print(sinValue)
+
+#plotting a math function
+import matplotlib.pyplot as plt
+plt.plot(pi100, sinValue) #1st input is for the X axis while 2nd input is for the Y axis
+plt.show() #this displays the plot in a window
+
+#2D ARRAYS (they can also have more dimensions)
+
+newArray = [[11,12,13],[21,22,23],[31,32,33]]
+newArray = np.array(newArray)
+print(newArray.ndim) #print how many dimensions the array has
+#it's helpful to think of dimensions as the amount of square bracket "ranks". Above we have 2 different "ranks/levels".
+
+print(newArray.shape) #3 lists of 3 units each
+print(newArray.size) #the output is "9" (3*3).
+
+print(newArray[1][2]) #row with index 1: 20s. Column with index 2: 23.
+#thinking of our array in a rectangular visual representation: 1st values represent the rows and 2nd values represent the columns
+
+print(newArray[0,0:2]) #slicing an array: printing the 1st row and 1st and 2nd columns (11 & 12).
+
+#adding arrays (same process of adding matrices)
+arrayPiola = np.array([[1,0],[0,1]])
+arrayCopado = np.array([[2,1],[1,2]]) #elements in the same position add to each other
+arrayArgentino = arrayPiola + arrayCopado
+print(arrayArgentino)
+
+#multiplying arrays by scaler (same of doing the same to matrices as well)
+arrayCopado = np.array([[2,1],[1,2]])
+arrayRe_Copado = arrayCopado*2
+print(arrayRe_Copado) #now all values were individually multiplied by 2
+
+#multipying arrays (same vibe of the operations above where elements in the same position relate to each other)
+arrayPiola = np.array([[1,0],[0,1]])
+arrayCopado = np.array([[2,1],[1,2]])
+arrayArgentino_multiplied = arrayPiola*arrayCopado
+print(arrayArgentino_multiplied)
+
+#matrices multiplication (in Linear Algebra the number of columns in matrix A must be equal to the number of rows in matrix B)
+A = np.array([[0,1,1],[1,0,1]])
+B = np.array([[1,1],[1,1],[-1,1]])
+C = np.dot(A,B)
+print(C)
+
+#APIs
+
+#lets use some info from the NBA, directly from their website at nba.com
+from nba_api.stats.static import teams
+
+nba_teams = teams.get_teams()
+
+for team in nba_teams:
+    print(team['full_name']) #printing all teams from the NBA
+print(nba_teams[0]) #Atlanta Hawks; alphabetical order. It displays all info about the Hawks including year of foundation, name abbreviation etc.
+
+#random user API
+from randomuser import RandomUser
+import pandas as pd
+
+r = RandomUser() #creating a random object
+userList = r.generate_users(10) #creating a list of 10 random users
+print(userList)
+
+name = r.get_full_name() #taking the required parameters, in this case the users' full names, to build our dataset
+
+for user in userList: #a For Loop to get 10 full names & emails
+    print(user.get_full_name(), " ", user.get_email())
+
+#generating a dataframe with the info above
+def usersDF():
+    users = []
+
+    for user in RandomUser.generate_users(10):
+        users.append({"Full name": user.get_full_name(), "Email": user.get_email()})
+    df = pd.DataFrame(users)
+    print(df)
+    return df
+usersDF()
